@@ -1,3 +1,3 @@
 class Promotion < ApplicationRecord
-  has_one :priduct
+  belogs_to :priduct
 end

@@ -1,4 +1,4 @@
 class Product < ApplicationRecord
-  has_one :subcategory
-  has_one :brand
+  belongs_to :subcategory
+  belongs_to :brand
 end

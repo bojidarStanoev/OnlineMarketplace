@@ -25,32 +25,42 @@ ActiveRecord::Schema.define(version: 20171223125256) do
   end
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
     t.text     "adress",     limit: 65535
     t.text     "products",   limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "subcategory_id"
+    t.integer  "brand_id"
     t.string   "name"
-    t.text     "description", limit: 65535
-    t.binary   "image",       limit: 65535
-    t.float    "price",       limit: 24
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.text     "description",    limit: 65535
+    t.binary   "image",          limit: 65535
+    t.float    "price",          limit: 24
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["brand_id"], name: "index_products_on_brand_id", using: :btree
+    t.index ["subcategory_id"], name: "index_products_on_subcategory_id", using: :btree
   end
 
   create_table "promotions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "product_id"
     t.string   "name"
     t.float    "newprice",   limit: 24
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.index ["product_id"], name: "index_promotions_on_product_id", using: :btree
   end
 
   create_table "subcategories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "category_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_subcategories_on_category_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
