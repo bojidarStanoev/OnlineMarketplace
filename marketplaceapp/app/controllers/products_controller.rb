@@ -9,17 +9,7 @@ class ProductsController < ApplicationController
     @product.brand = Brand.find_or_initialize_by(id: j['brand_id'])
     @product.subproduct = Subproduct.find_or_initialize_by(id: j['subcategory_id'])
     @product.save
-    render :json =>
-    {
-      "id" => @product[:id],
-      "name" => @product[:name],
-      "description" = @product[:description],
-      "image" = @product[:image],
-      "price" = @product[:price],
-      "brand_id" = @product[:brand_id],
-      "subcategory_id" = @product[:subcategory_id]
-
-    }, :status => 201
+    render :json =>@product, :status => 201
   end
 
   def index
@@ -36,16 +26,7 @@ class ProductsController < ApplicationController
 
 
       if @product.persisted?
-        render :json =>
-        {
-          "id" => @product[:id],
-          "name" => @product[:name],
-          "description" = @product[:description],
-          "image" = @product[:image],
-          "price" = @product[:price],
-          "brand_id" = @product[:brand_id],
-          "subcategory_id" = @product[:subcategory_id]
-        }
+        render :json => @product
       else
         render :json => {}, :status => 400
       end
@@ -63,18 +44,8 @@ class ProductsController < ApplicationController
         @product.brand = Brand.find_or_initialize_by(id: j['brand_id'])
         @product.subproduct = Subproduct.find_or_initialize_by(id: j['subcategory_id'])
         @product.save
-        
-        render :json =>
-        {
-          "id" => @product[:id],
-          "name" => @product[:name],
-          "description" = @product[:description],
-          "image" = @product[:image],
-          "price" = @product[:price],
-          "brand_id" = @product[:brand_id],
-          "subcategory_id" = @product[:subcategory_id]
 
-        }, :status => 201
+        render :json => @product, :status => 201
     else
       render :json => {}, :status => 404
     end
@@ -84,16 +55,7 @@ class ProductsController < ApplicationController
     @product = product.find_or_initialize_by(id: params[:id])
 
     if @product.persisted?
-      render :json =>
-        {
-          "id" => @product[:id],
-          "name" => @product[:name],
-          "description" = @product[:description],
-          "image" = @product[:image],
-          "price" = @product[:price],
-          "brand_id" = @product[:brand_id],
-          "subcategory_id" = @product[:subcategory_id]
-        }, :status => 204
+      render :json => @product, :status => 204
 
       else
         render :json => {}, :status => 404

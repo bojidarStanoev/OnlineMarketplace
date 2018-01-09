@@ -6,12 +6,7 @@ class SubcategoriesController < ApplicationController
     @subcategory.category = Category.find_or_initialize_by(id: j['category_id'])
     @subcategory.save
 
-    render :json =>
-    {
-      "id" => @subcategory[:id],
-      "name" => @subcategory[:name],
-      "category_id" => @subactegory[:category_id]
-    }, :status => 201
+    render :json => @subcategory, :status => 201
   end
 
   def index
@@ -27,7 +22,7 @@ class SubcategoriesController < ApplicationController
     @products = Product.where(subcategory_id: params[:id])
 
 
-      if @products.persisted?
+      if @products.any?
         render :json => @products
       else
         render :json => {}, :status => 400
@@ -42,13 +37,7 @@ class SubcategoriesController < ApplicationController
         @subcategory[:name] = j['name']
         @subcategory.category = Category.find_or_initialize_by(id: j['category_id'])
         @subcategory.save
-        render :json =>
-        {
-          "id" => @subcategory[:id],
-          "name" => @subcategory[:name],
-          "category_id" => @subactegory[:category_id]
-
-        }, :status => 201
+        render :json =>@subcategory, :status => 201
     else
       render :json => {}, :status => 404
     end
@@ -58,12 +47,7 @@ class SubcategoriesController < ApplicationController
     @subcategory = Subcategory.find_or_initialize_by(id: params[:id])
 
     if @subcategory.persisted?
-      render :json =>
-        {
-          "id" => @subcategory[:id],
-          "name" => @subcategory[:name],
-          "category_id" => @subactegory[:category_id]
-        }, :status => 204
+      render :json => @subcategory, :status => 204
 
       else
         render :json => {}, :status => 404

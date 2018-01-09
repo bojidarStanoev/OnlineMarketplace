@@ -15,9 +15,9 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.all.page(params[:page])
     if @categories.any?
-				 render :json => @categories
-			 else
-				 render :nothing => true, :status => 400
+				render :json => @categories
+		else
+				render :nothing => true, :status => 400
 			 end
   end
 
