@@ -22,15 +22,10 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find_or_initialize_by(id: params[:id])
+    @subcategories = Subcategory.where(category_id: params[:id])
 
-
-      if @category.persisted?
-        render :json =>
-        {
-          "id" => @category[:id],
-          "name" => @category[:name]
-        }
+      if @subcategories.any?
+        render :json => @subcategories
       else
         render :json => {}, :status => 400
       end
@@ -46,7 +41,7 @@ class CategoriesController < ApplicationController
         render :json =>
         {
           "id" => @category[:id],
-          "name" => @category[:manufacturer]
+          "name" => @category[:name]
 
         }, :status => 201
     else
