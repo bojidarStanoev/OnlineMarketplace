@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = product.find_or_initialize_by(id: params[:id])
+    @product = Product.find_or_initialize_by(id: params[:id])
 
 
       if @product.persisted?
@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = product.find_or_initialize_by(id: params[:id])
+    @product = Product.find_or_initialize_by(id: params[:id])
 
 		if @product.persisted?
         j = JSON.parse(request.raw_post)
@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = product.find_or_initialize_by(id: params[:id])
+    @product = Product.find_or_initialize_by(id: params[:id])
 
     if @product.persisted?
       render :json => @product, :status => 204
