@@ -66,6 +66,76 @@ $(document).ready(function(){
   });
 
 
+  $("#createbrand").click(function(){
+
+    $("form").empty();
+    $("form").append("Name: <input type='text' id='name' name='name'<br> "+
+    "<button id=brand_c value='Submit'   class='btn btn-primary'>");
+  });
+
+  $(document).on("click", "#brand_c" , function() {
+    var formData = {};
+    formData.name = $('#name').val();
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:3000/brands/",
+      data: JSON.stringify(formData),
+      async: true,
+      success: function (msg) {
+          console.log(msg);
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+    });
+  });
+
+  $("#deletebrand").click(function(){
+
+    $("form").empty();
+    $("form").append("Id: <input type='number' id='number' name='name'<br> "+
+    "<button id=brand_d value='Submit'   class='btn btn-primary'>");
+  });
+  $(document).on("click", "#brand_d" , function() {
+    $.ajax({
+      type: "DELETE",
+      url: "http://localhost:3000/brands/" + $('#number').val(),
+      async: true,
+      success: function (msg) {
+          console.log(msg);
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+    });
+  });
+
+  $("#editbrand").click(function(){
+
+    $("form").empty();
+    $("form").append("Name: <input type='text' id='name' name='name'<br> "+
+    "Id: <input type='number' id='number'><br>" +
+    "<button id=brand_e value='Submit'   class='btn btn-primary'>");
+  });
+  $(document).on("click", "#brand_e" , function() {
+    var formData = {};
+    formData.name = $('#name').val();
+    $.ajax({
+      type: "PUT",
+      url: "http://localhost:3000/brands/" + $('#number').val(),
+      data: JSON.stringify(formData),
+      async: true,
+      success: function (msg) {
+          console.log(msg);
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+    });
+  });
+
+
+
 
 
 
