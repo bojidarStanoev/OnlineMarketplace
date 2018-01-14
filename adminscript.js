@@ -64,7 +64,32 @@ $(document).ready(function(){
       processData: false
     });
   });
+  $("#createproduct").click(function(){
 
+    $("form").empty();
+    $("form").append("Product name: <input type='text' id='name'<br> "+
+      "Description: <textarea cols='40' rows='5' id='description'</textarea><br> "+
+      "Price: <input type='number' step='0.01' id='price'><br>" +
+      "Brand_id: <input type='number' id='brand_id'><br>" +
+      "Subcategory_id: <input type='number' step='0.01' id='Category_id'><br>" +
+      "<button id=product_c value='Submit'   class='btn btn-primary'>");
+  });
+  $(document).on("click", "#prouct_c" , function() {
+    var formData = {};
+    formData.name = $('#name').val();
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:3000/products/",
+      data: JSON.stringify(formData),
+      async: true,
+      success: function (msg) {
+          console.log(msg);
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+    });
+  });
 
   $("#createbrand").click(function(){
 
