@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
     @product = Product.new
     @product[:name] = j['name']
     @product[:description] = j['description']
-    @product[:image] = j['image']
+    @product[:image] = Base64.decode64(j['image'])
     @product[:price] = j['price']
     @product.brand = Brand.find_or_initialize_by(id: j['brand_id'])
     @product.subcategory = Subcategory.find_or_initialize_by(id: j['subcategory_id'])

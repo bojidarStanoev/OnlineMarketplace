@@ -1,3 +1,18 @@
+
+var reader;
+
+var openFile = function(event) {
+  var input = event.target;
+
+  reader = new FileReader();
+  reader.onload = function(){
+    var dataURL = reader.result;
+  };
+  reader.readAsDataURL(input.files[0]);
+};
+
+
+
 $(document).ready(function(){
   $("#createcategory").click(function(){
 
@@ -67,16 +82,22 @@ $(document).ready(function(){
   $("#createproduct").click(function(){
 
     $("form").empty();
-    $("form").append("Product name: <input type='text' id='name'<br> "+
-      "Description: <textarea cols='40' rows='5' id='description'</textarea><br> "+
-      "Price: <input type='number' step='0.01' id='price'><br>" +
-      "Brand_id: <input type='number' id='brand_id'><br>" +
-      "Subcategory_id: <input type='number' step='0.01' id='Category_id'><br>" +
+    $("form").append("Product name: <input type='text' id='name'> "+
+      "Description: <textarea cols='40' rows='5' id='description'></textarea> "+
+      "Price: <input type='number' step='0.01' id='price'>" +
+      "Image: <input id ='image' type='file' accept='image/*' onchange='openFile(event)' >" +
+      "Brand_id: <input type='number' id='brand_id'>" +
+      "Subcategory_id: <input type='number' step='0.01' id='subcategory_id'>" +
       "<button id=product_c value='Submit'   class='btn btn-primary'>");
   });
-  $(document).on("click", "#prouct_c" , function() {
+  $(document).on("click", "#product_c" , function() {
     var formData = {};
     formData.name = $('#name').val();
+    formData.description = $('#description').val();
+    formData.image = reader.result;
+    formData.price = $('#price').val();
+    formData.brand_id = $('#brand_id').val();
+    formData.subcategory_id = $('#subcategory_id').val();
     $.ajax({
       type: "POST",
       url: "http://localhost:3000/products/",
