@@ -181,6 +181,76 @@ $(document).ready(function(){
   });
 
 
+  $("#createsubcategory").click(function(){
+
+    $("form").empty();
+    $("form").append("Name: <input type='text' id='name' name='name'<br> "+
+      "categoryId: <input type='number' id='category_id'><br>" +
+    "<button id=subcategory_c value='Submit'   class='btn btn-primary'>");
+  });
+
+  $(document).on("click", "#subcategory_c" , function() {
+    var formData = {};
+    formData.name = $('#name').val();
+    formData.category_id = $('#category_id').val();
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:3000/subcategories/" ,
+      data: JSON.stringify(formData),
+      async: true,
+      success: function (msg) {
+          console.log(msg);
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+    });
+  });
+
+  $("#deletesubcategory").click(function(){
+
+    $("form").empty();
+    $("form").append("Id: <input type='number' id='number' name='name'<br> "+
+    "<button id=subcategory_d value='Submit'   class='btn btn-primary'>");
+  });
+  $(document).on("click", "#subcategory_d" , function() {
+    $.ajax({
+      type: "DELETE",
+      url: "http://localhost:3000/subcategories/" + $('#number').val(),
+      async: true,
+      success: function (msg) {
+          console.log(msg);
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+    });
+  });
+
+  $("#editsubcategory").click(function(){
+
+    $("form").empty();
+    $("form").append("Name: <input type='text' id='name' name='name'<br> "+
+    "Id: <input type='number' id='number'><br>" +
+    "<button id=subcategory_e value='Submit'   class='btn btn-primary'>");
+  });
+  $(document).on("click", "#subcategory_e" , function() {
+    var formData = {};
+    formData.name = $('#name').val();
+    $.ajax({
+      type: "PUT",
+      url: "http://localhost:3000/subcategories/" + $('#number').val(),
+      data: JSON.stringify(formData),
+      async: true,
+      success: function (msg) {
+          console.log(msg);
+      },
+      cache: false,
+      contentType: false,
+      processData: false
+    });
+  });
+
 
 
 
