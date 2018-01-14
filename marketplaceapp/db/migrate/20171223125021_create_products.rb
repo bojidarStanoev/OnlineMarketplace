@@ -5,7 +5,7 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.belongs_to :brand, index: true
       t.string :name
       t.text :description
-      t.binary :image
+      t.binary :image, :limit => 10.megabyte
       t.float :price
 
       t.timestamps

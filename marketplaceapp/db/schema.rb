@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 20171223125256) do
     t.integer  "brand_id"
     t.string   "name"
     t.text     "description",    limit: 65535
-    t.binary   "image",          limit: 65535
+    t.binary   "image",          limit: 16777215
     t.float    "price",          limit: 24
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.index ["brand_id"], name: "index_products_on_brand_id", using: :btree
     t.index ["subcategory_id"], name: "index_products_on_subcategory_id", using: :btree
   end

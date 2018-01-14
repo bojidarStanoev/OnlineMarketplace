@@ -1,19 +1,17 @@
 
 var reader;
 
-var openFile = function(event) {
-  var input = event.target;
-
-  reader = new FileReader();
-  reader.onload = function(){
-    var dataURL = reader.result;
-  };
-  reader.readAsDataURL(input.files[0]);
-};
-
-
 
 $(document).ready(function(){
+  $(document).on("change", "#image" , function() {
+    var input = event.target;
+
+    reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  });
   $("#createcategory").click(function(){
 
     $("form").empty();
@@ -85,7 +83,7 @@ $(document).ready(function(){
     $("form").append("Product name: <input type='text' id='name'> "+
       "Description: <textarea cols='40' rows='5' id='description'></textarea> "+
       "Price: <input type='number' step='0.01' id='price'>" +
-      "Image: <input id ='image' type='file' accept='image/*' onchange='openFile(event)' >" +
+      "Image: <input id ='image' type='file' accept='image/*'>" +
       "Brand_id: <input type='number' id='brand_id'>" +
       "Subcategory_id: <input type='number' step='0.01' id='subcategory_id'>" +
       "<button id=product_c value='Submit'   class='btn btn-primary'>");
