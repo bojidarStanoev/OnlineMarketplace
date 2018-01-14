@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
     @product[:image] = j['image']
     @product[:price] = j['price']
     @product.brand = Brand.find_or_initialize_by(id: j['brand_id'])
-    @product.subproduct = Subproduct.find_or_initialize_by(id: j['subcategory_id'])
+    @product.subcategory = Subcategory.find_or_initialize_by(id: j['subcategory_id'])
     @product.save
     render :json =>@product, :status => 201
   end
@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
         @product[:image] = j['image']
         @product[:price] = j['price']
         @product.brand = Brand.find_or_initialize_by(id: j['brand_id'])
-        @product.subproduct = Subproduct.find_or_initialize_by(id: j['subcategory_id'])
+        @product.subcategory = Subcategory.find_or_initialize_by(id: j['subcategory_id'])
         @product.save
 
         render :json => @product, :status => 201
