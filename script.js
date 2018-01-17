@@ -27,12 +27,31 @@ $(document).ready(function(){
   $(document).on("click", ".subcategory" , function() {
     $.getJSON("http://localhost:3000/subcategories/" + this.id, function(data, status){
       var products = [];
-      jQuery(data).each(function(i, subcategory){
-        console.log(subcategory.id, subcategory.name);
-        subcategories.push("<li id='" + subcategory.id + "'class = 'subcategory'> <a class='test' href='#'>" + subcategory.name +"</a></li>");
+      jQuery(data).each(function(i, product){
+        console.log(product.id, product.name);
+        products.push("<li id='" + product.id + "'class = 'product'> <a class='test' href='#'>" + product.name +"</a></li>");
       });
-      $(".subcategories").empty();
-      $(".subcategories").append(subcategories);
+      $("#productsList").empty();
+      $("#productsList").append(products);
+    });
+  });
+  $(document).on("click", ".product" , function() {
+    $.getJSON("http://localhost:3000/products/" + this.id, function(data, status){
+      var img,name,description,price;
+      jQuery(data).each(function(i, product){
+        console.log(product.id, product.name);
+        img = product.image;
+        name = product.name;
+        description = product.description;
+        price = product.price;
+      });
+      $("#productName").html("<p>" + name + "</p>");
+      $("#productDescription").html("<p>" + description + "</p>");
+      $("#productPrice").html("<p>" + price + "</p>");
+    $('#productImg').removeProp('src');
+    $('#productImg').prop('src', img);
+
+
     });
   });
 
